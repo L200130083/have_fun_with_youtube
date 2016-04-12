@@ -1,0 +1,58 @@
+<div  id="player"></div>
+<a href="#" id="pause">Pause</a>
+<a href="#" id="play">Play</a>
+<a href="#" id="stop">stop</a>
+<a href="#" id="resume">Resume</a>
+<a href="#" id="change_bitch" data-track="Vw4KVoEVcr0">change</a>
+<div id="getCurrentTime">0
+</div>
+<div id="getDuration">0
+</div>
+<div id="percents">0%
+</div>
+
+<script>
+// 2. This code loads the IFrame Player API code asynchronously.
+var tag = document.createElement('script');
+tag.src = "http://www.youtube.com/player_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// 3. This function creates an <iframe> (and YouTube player)
+//    after the API code downloads.
+var player;
+function onYouTubePlayerAPIReady() {
+    player = new YT.Player('player', {
+        height: '315',
+        width: '560',
+        videoId: 'bpOR_HuHRNs',
+        playerVars: {
+                'autoplay': 0,
+                'controls': 0
+        },
+    });
+    document.getElementById('resume').onclick = function() {
+        player.playVideo();
+    };
+    document.getElementById('pause').onclick = function() {
+        player.pauseVideo();
+    };
+    document.getElementById('play').onclick = function() {
+        player.playVideo();
+    };
+    document.getElementById('stop').onclick = function() {
+        player.stopVideo();
+    };
+    document.getElementById('change_bitch').onclick = function() {
+        player.loadVideoById("paHJJ1H4-d8",0, 'small');
+    };
+     
+    var intv = window.setInterval(function(){
+    	if (player.getPlayerState() === 1){
+      	document.getElementById('getCurrentTime').innerHTML = player.getCurrentTime();
+        document.getElementById('getDuration').innerHTML = player.getDuration();
+        document.getElementById('percents').innerHTML = player.getCurrentTime()/player.getDuration()*100; 
+      }
+    }, 25);
+}
+</script>
